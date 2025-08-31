@@ -5,11 +5,11 @@ if (x<0)
         else{
             int h=x; 
             int s=0; 
-            while(h>0){
-                s=s*10+h%10; 
-                h/=10; 
+            while(x>0){
+                s=s*10+x%10; 
+                x/=10; 
             } 
-            if(s==x) 
+            if(s==h) 
                 return true; 
             else 
                     return false;
