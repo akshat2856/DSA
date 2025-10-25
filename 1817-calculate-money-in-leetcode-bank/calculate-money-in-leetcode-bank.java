@@ -3,7 +3,6 @@ class Solution {
     int total = 0;
         int mondayAmount = 1;
         int current = mondayAmount;
-
         for (int day = 1; day <= n; day++) {
             total += current;
             current++;
@@ -12,8 +11,6 @@ class Solution {
                 current = mondayAmount;
             }
         }
-
         return total;
-
     }
 }
