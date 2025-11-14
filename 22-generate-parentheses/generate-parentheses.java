@@ -1,15 +1,27 @@
 class Solution {
-    public void helper(int n,int l, int r, String s, List<String> ans){
-if(r==n){
-    ans.add(s);
-    return;
-}
-if(l<n) helper(n,l+1,r,s+"(",ans);
-if(r<l) helper(n,l,r+1,s+")",ans);
-    }
     public List<String> generateParenthesis(int n) {
-        List<String> ans = new ArrayList<>();
-        helper(n,0,0,"",ans);
-        return ans;
+        List<String> li = new ArrayList<>();
+        int close = n;
+        int open = n;
+        String op = "";
+        Solve(open,close,op,li);
+        return li;
+    }
+    public static void Solve(int open,int close,String op,List<String> li){
+        if(open==0&&close==0){
+            li.add(op);
+            return;
+        }
+        if(open!=0){
+            String op1 = op;
+            op1 = op1+"(";
+            Solve(open-1,close,op1,li);
+        }
+        if(close>open){
+          String  op2 = op;
+         op2 = op2+")";
+          Solve(open,close-1,op2,li);
+        }
+        return;
     }
 }
