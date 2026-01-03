@@ -2,7 +2,7 @@ class Solution {
     public int totalFruit(int[] fruits) {
        int i = 0;
        int j =0;
-       int max = 1;
+       int max = 0;
        HashMap<Integer,Integer> map =new HashMap<>();
        while(j<fruits.length){
           map.put(fruits[j],map.getOrDefault(fruits[j],0)+1);
