@@ -4,8 +4,6 @@ class Solution {
         int n = obstacleGrid[0].length;
 
         int[][] dp = new int[m][n];
-
-        // If starting cell has obstacle → no path
         if(obstacleGrid[0][0] == 1) return 0;
 
         dp[0][0] = 1;
