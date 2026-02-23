@@ -6,8 +6,8 @@ class Solution {
         while(left<right){
             int sum = numbers[left] + numbers[right];
             if(sum==target)return new int[] {left+1,right+1};
-            if(sum>target)right--;
-            if(sum<target)left++;
+            else if(sum>target)right--;
+            else left++;
         }
         return new int[] {-1,-1};
     }
