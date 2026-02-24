@@ -18,13 +18,14 @@ class Solution {
             if(tempA.val<=tempB.val){
                 temp.next = tempA;
                 tempA = tempA.next;
-                temp = temp.next;
+                
             }
             else{
                 temp.next = tempB;
                 tempB = tempB.next;
-                temp = temp.next;
+                
             }
+             temp = temp.next;
         }
         while(tempA!=null){
             temp.next = tempA;
