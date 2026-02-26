@@ -1,35 +1,32 @@
 class Solution {
-    public static class Edge{
-        int src,nbr;
-        Edge(int src, int nbr){
-            this.src = src;
-            this.nbr = nbr;
-        }
+     public boolean validPath(int n, int[][] edges, int start, int end) {
+      if(start==end)return true;
+      List<List<Integer>> adj = new ArrayList<>();
+      for(int i=0;i<n;i++){
+          List<Integer> list = new ArrayList<>();
+          adj.add(list);
+      }
+      for(int i=0;i<edges.length;i++){
+          int a = edges[i][0],b = edges[i][1];
+          adj.get(a).add(b);
+          adj.get(b).add(a);
+      }
+      boolean[] vis = new boolean[n];
+      bfs(start,adj,vis);
+      return vis[end];
     }
-    public boolean validPath(int n, int[][] edges, int source, int destination) {
-        ArrayList<Edge>[] graph = new ArrayList[n];
-        for(int i=0 ; i<n ; i++){
-            graph[i] = new ArrayList<>();
-        }
-        for(int[] e : edges){
-int u = e[0];
-int v = e[1];
-graph[u].add(new Edge(u,v));
-graph[v].add(new Edge(v,u));
-        }
-        boolean[] visited =  new boolean[n];
-        return haspathHelper(graph,source,visited,destination);
-    }
-    public  boolean haspathHelper(ArrayList<Edge>[] graph,int vtx,boolean[] visited,int dest){
-        if(vtx==dest)return true;
 
-        visited[vtx] = true;
-        for(Edge e : graph[vtx]){
-            if(!visited[e.nbr]){
-                boolean res = haspathHelper(graph,e.nbr,visited,dest);
-                if(res)return true;
+    private void bfs(int start, List<List<Integer>> adj, boolean[] vis) {
+        Queue<Integer> q = new LinkedList<>();
+        q.add(start);
+        while(q.size()>0){
+            int front = q.remove();
+            for(int ele : adj.get(front)){
+                if(!vis[ele]){
+                    q.add(ele);
+                    vis[ele] = true;
+                }
             }
         }
-        return false;
     }
 }
