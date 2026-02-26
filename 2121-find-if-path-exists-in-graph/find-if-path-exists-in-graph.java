@@ -12,11 +12,11 @@ class Solution {
           adj.get(b).add(a);
       }
       boolean[] vis = new boolean[n];
-      bfs(start,adj,vis);
+      bfs(start,adj,vis,end);
       return vis[end];
     }
 
-    private void bfs(int start, List<List<Integer>> adj, boolean[] vis) {
+    private void bfs(int start, List<List<Integer>> adj, boolean[] vis,int end) {
         Queue<Integer> q = new LinkedList<>();
         q.add(start);
         while(q.size()>0){
@@ -25,6 +25,7 @@ class Solution {
                 if(!vis[ele]){
                     q.add(ele);
                     vis[ele] = true;
+                    if(ele==end)return;
                 }
             }
         }
