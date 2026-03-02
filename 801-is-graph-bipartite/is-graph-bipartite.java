@@ -25,6 +25,7 @@ class Solution {
         int[] vis = new int[n];
         Arrays.fill(vis,-1);
         for(int i=0;i<n;i++){
+            if(ans==false)return false;
             if(vis[i]==-1)bfs(i,graph,vis);
         }
         return ans;
