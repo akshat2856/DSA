@@ -12,14 +12,10 @@ class Solution {
         else if(nums[i]==0 && nums[j]==0){
             j++;
         }
-        else if(nums[i]!=0 && nums[j]!=0){
-            i++;
-            j++;
-        }
-        else if(nums[i]!=0 && nums[j]==0){
-            i++;
-            j++;
-        }
+         else {  
+                i++;
+                if(i == j) j++;
+            }
        }
     }
     public void swap(int[] nums,int i,int j){
