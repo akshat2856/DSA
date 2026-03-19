@@ -15,22 +15,21 @@
  */
 class Solution {
     public boolean isSymmetric(TreeNode root) {
-       if(root==null)return true;
-       Queue<TreeNode> lefttree = new LinkedList<>();
-       Queue<TreeNode> righttree = new LinkedList<>();
-       lefttree.add(root.left);
-       righttree.add(root.right);
-       while(!lefttree.isEmpty() && !righttree.isEmpty()){
-        TreeNode leftNode = lefttree.poll();
-        TreeNode rightNode = righttree.poll();
-        if(leftNode==null && rightNode==null)continue;
-        if(leftNode==null || rightNode==null)return false;
-        if(leftNode.val!=rightNode.val)return false;
-        lefttree.add(leftNode.left);
-        lefttree.add(leftNode.right);
-        righttree.add(rightNode.right);
-         righttree.add(rightNode.left);
-       } 
-       return true;
+        mirror(root.left);
+        return isIdentical(root.left,root.right);
+    }
+    void mirror(TreeNode root){
+        if(root==null)return;
+        TreeNode temp = root.left;
+        root.left = root.right;
+        root.right = temp;
+        mirror(root.left);
+        mirror(root.right);
+    }
+    boolean isIdentical(TreeNode p,TreeNode q){
+        if(p==null && q==null)return true;
+        if(p==null || q==null)return false;
+        if(p.val!=q.val)return false;
+        return (isIdentical(p.left,q.left) && isIdentical(p.right,q.right));
     }
 }
