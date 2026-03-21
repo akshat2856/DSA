@@ -17,16 +17,16 @@ class Solution {
     public List<Integer> rightSideView(TreeNode root) {
         List<Integer> list = new ArrayList<>();
         if(root==null)return list;
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.offer(root);
-        while(!queue.isEmpty()){
-            int size = queue.size();
+        Queue<TreeNode> tree = new LinkedList<>();
+        tree.add(root);
+        while(!tree.isEmpty()){
+            int size = tree.size();
             int level = 0;
-            for(int i =0;i<size;i++){
-                 TreeNode node = queue.poll();
-                 level = node.val;
-                 if(node.left!=null)queue.add(node.left);
-                 if(node.right!=null)queue.add(node.right);
+            for(int i=0;i<size;i++){
+                TreeNode node = tree.poll();
+            level = node.val;
+                if(node.left!=null)tree.add(node.left);
+                if(node.right!=null)tree.add(node.right);
             }
             list.add(level);
         }
