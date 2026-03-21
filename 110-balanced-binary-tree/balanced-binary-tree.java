@@ -14,15 +14,22 @@
  * }
  */
 class Solution {
+    static boolean flag;
     public boolean isBalanced(TreeNode root) {
         if(root==null)return true;
-        int heightleft = height(root.left);
-        int heightright = height(root.right);
-        if(Math.abs(heightleft-heightright)>1)return false;
-        return isBalanced(root.left) && isBalanced(root.right);
+        flag = true;
+        height(root);
+        return flag;
+        // int heightleft = height(root.left);
+        // int heightright = height(root.right);
+        // if(Math.abs(heightleft-heightright)>1)return false;
+        // return isBalanced(root.left) && isBalanced(root.right);
     }
     public int height(TreeNode node){
         if(node==null)return 0;
-        return 1 + Math.max(height(node.left),height(node.right));
+        int leftheight = height(node.left);
+        int rightheight = height(node.right);
+        if(Math.abs(leftheight-rightheight)>1)flag = false;
+        return 1 + Math.max(leftheight,rightheight);
     }
 }
