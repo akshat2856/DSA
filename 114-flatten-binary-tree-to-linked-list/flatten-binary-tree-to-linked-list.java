@@ -43,18 +43,29 @@
 //optimal with O(1) sapce
 class Solution {
     public void flatten(TreeNode root) {
-        TreeNode cur = root;
-        while (cur != null) {
-            if (cur.left != null) {
-                TreeNode prev = cur.left;
-                while (prev.right != null) {
-                    prev = prev.right;
-                }
-                prev.right = cur.right;
-                cur.right = cur.left;
-                cur.left = null;
-            }
-            cur = cur.right;
-        }
+        // TreeNode cur = root;
+        // while (cur != null) {
+        //     if (cur.left != null) {
+        //         TreeNode prev = cur.left;
+        //         while (prev.right != null) {
+        //             prev = prev.right;
+        //         }
+        //         prev.right = cur.right;
+        //         cur.right = cur.left;
+        //         cur.left = null;
+        //     }
+        //     cur = cur.right;
+        // }
+        if(root==null)return;
+        TreeNode lst = root.left;
+        TreeNode rst = root.right;
+        root.left = null;
+        root.right = null;
+        flatten(lst);
+        flatten(rst); 
+        root.right = lst;
+        TreeNode last = root;
+        while(last.right!=null)last = last.right;
+        last.right = rst;
     }
 }
