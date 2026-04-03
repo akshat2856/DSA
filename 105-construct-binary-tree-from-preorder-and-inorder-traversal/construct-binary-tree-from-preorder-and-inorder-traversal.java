@@ -14,40 +14,25 @@
  * }
  */
 class Solution {
-
-    public TreeNode buildTree(int[] preOrder, int[] inOrder) {
-
-       
-        Map<Integer, Integer> inOrderIndexMap = new HashMap<>();
-
-        for (int i = 0; i < inOrder.length; i++) {
-            inOrderIndexMap.put(inOrder[i], i);
-        }
-
-        
-        return splitTree(preOrder, inOrderIndexMap, 0,0,inOrder.length - 1);
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+       int n = preorder.length;
+       return build(0,n-1,0,n-1,preorder,inorder); 
     }
-
-    private TreeNode splitTree(int[] preOrder,Map<Integer,Integer> inOrderIndexMap,int rootIndex,int left,int right) {
-
-        TreeNode root = new TreeNode(preOrder[rootIndex]);
-
-        int mid = inOrderIndexMap.get(preOrder[rootIndex]);
-
-        if (mid > left) {
-            root.left = splitTree(preOrder, inOrderIndexMap,
-                                  rootIndex + 1,    
-                                  left,
-                                  mid - 1);
+    public TreeNode build(int preLi,int preHi,int inLi,int inHi,int[] preorder,int[] inorder){
+        if(preLi>preHi)return null;
+        int val = preorder[preLi];
+        TreeNode root = new TreeNode(val);
+        int r = -1;
+        for(int i=inLi;i<=inHi;i++){
+            if(inorder[i]==val){
+                r=i;
+                break;
+            }
         }
-
-        if (mid < right) {
-            root.right = splitTree(preOrder, inOrderIndexMap,
-                                   rootIndex + (mid - left) + 1,
-                                   mid + 1,
-                                   right);
-        }
-
+        int cnt = r-inLi;
+        root.left = build(preLi+1,preLi+cnt,inLi,r-1,preorder,inorder);
+        root.right = build(preLi+cnt+1,preHi,r+1,inHi,preorder,inorder);
         return root;
     }
 }
+
