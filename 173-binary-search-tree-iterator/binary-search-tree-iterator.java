@@ -20,16 +20,16 @@ private Stack<TreeNode> stack = new Stack<TreeNode>();
     }
     
     public int next() {
-        TreeNode tmpNode = stack.pop();
-        pushAll(tmpNode.right);
-        return tmpNode.val;
+        TreeNode tempNode = stack.pop();
+        pushAll(tempNode.right);
+        return tempNode.val;
     }
     
     public boolean hasNext() {
         return !stack.isEmpty();
     }
-    private void pushAll(TreeNode node){
-        for(; node!=null;stack.push(node),node = node.left);
+    public void pushAll(TreeNode node){
+        for(;node!=null;stack.push(node),node = node.left);
     }
 }
 
