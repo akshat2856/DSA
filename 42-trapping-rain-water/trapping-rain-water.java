@@ -4,27 +4,15 @@ class Solution {
        int[] maxL = new int[n];
        int[] maxR = new int[n];
        int unit =0;
-       int max = height[0];
-       for(int i=0;i<n;i++){
-        if(height[i]>=max){
-            maxL[i] = height[i];
-            max = height[i];
-        }
-        else{
-            maxL[i] = max;
-        }
-       }
-       int maxi = height[n-1];
-       for(int i=n-1;i>=0;i--){
-        if(height[i]>=maxi){
-            maxR[i] = height[i];
-            maxi = height[i];
-        }
-        else{
-            maxR[i] = maxi;
-        }
-       }
-       for(int i=0;i<n;i++){
+       maxL[0]= height[0];
+       for (int i = 1; i < n; i++)
+         maxL[i] = Math.max(maxL[i - 1], height[i]);
+
+        maxR[n - 1] = height[n - 1];
+        for (int i = n - 2; i >= 0; i--)
+            maxR[i] = Math.max(maxR[i + 1], height[i]);
+       
+        for(int i=0;i<n;i++){
         unit+=Math.min(maxL[i],maxR[i])-height[i];
        }
        return unit;
