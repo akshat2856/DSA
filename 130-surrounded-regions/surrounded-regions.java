@@ -5,7 +5,7 @@ class Solution {
     boolean[][] vis = new boolean[m][n];
     for(int i=0;i<m;i++){
         for(int j=0;j<n;j++){if(board[i][j]=='O'){
-            if(i==0 || j==0 || i==m-1 || j==n-1 && !vis[i][j])dfs(board,i,j,vis);
+            if((i==0 || j==0 || i==m-1 || j==n-1) && !vis[i][j])dfs(board,i,j,vis);
         }
       }
     }
