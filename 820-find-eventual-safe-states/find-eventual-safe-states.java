@@ -11,12 +11,12 @@ class Solution {
 }
         int[] vis = new int[V];
         int[] pathvis = new int[V];
-        int[] terminal = new int[V];
-        for (int i = 0; i < edges.length; i++) {
-            if (edges[i].length == 0) {
-             terminal[i] = 1;
-            }
-        }
+        // int[] terminal = new int[V];
+        // for (int i = 0; i < edges.length; i++) {
+        //     if (edges[i].length == 0) {
+        //      terminal[i] = 1;
+        //     }
+        // }
         for(int i=0;i<V;i++){
             // if(vis[i]==0){
             if(dfs(i,adj,vis,pathvis)==true)continue;
