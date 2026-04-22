@@ -20,14 +20,14 @@ class Solution {
         for(int i=0;i<V;i++){
             // if(vis[i]==0){
             if(dfs(i,adj,vis,pathvis)==true)continue;
-            if(dfs(i,adj,vis,pathvis)==false ){
-                for(int k=0;k<V;k++){
-                    if(terminal[k]==1){
-                        answer.add(i);
-                        break;
-                    }
-                // }
-            }
+            if(dfs(i,adj,vis,pathvis)==false ){answer.add(i);
+            //     for(int k=0;k<V;k++){
+            //         if(terminal[k]==1){
+            //             answer.add(i);
+            //             break;
+            //         }
+            //     // }
+            // }
             }
         }
         return answer;
