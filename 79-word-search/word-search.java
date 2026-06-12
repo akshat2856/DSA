@@ -7,7 +7,7 @@ class Solution {
         for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
                 if(board[i][j] == word.charAt(0)){
-                    if(dfs(""+board[i][j],vis,word,board,i,j)==true)return true;;
+                    if(dfs(""+board[i][j],vis,word,board,i,j)==true)return true;
                 }
             }
         }
