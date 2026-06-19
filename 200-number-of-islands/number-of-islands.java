@@ -1,75 +1,26 @@
 class Solution {
-      public int numIslands(char[][] grid) {
-      int m = grid.length;
-      int n = grid[0].length;
-      int count = 0;
-      boolean[][] vis = new boolean[m][n];
-      for(int i=0;i<m;i++){
-          for(int j=0;j<n;j++){
-              if(grid[i][j]=='1' && vis[i][j]==false){
-                 // bfs(i,j,grid,vis);
-                 dfs(i,j,grid,vis);
-                  count++;
-              }
-          }
-      }
-      return count;
-    }
-    public void dfs(int i, int j, char[][] grid, boolean[][] vis) {
+    public int numIslands(char[][] grid) {
         int m = grid.length;
         int n = grid[0].length;
-        vis[i][j] = true;
-        if(i-1>=0 && grid[i-1][j]=='1' && vis[i-1][j]==false)dfs(i-1,j,grid,vis);
-        if(i+1<m && grid[i+1][j]=='1' && vis[i+1][j]==false)dfs(i+1,j,grid,vis);
-        if(j+1<n && grid[i][j+1]=='1' && vis[i][j+1]==false)dfs(i,j+1,grid,vis);
-        if(j-1>=0 && grid[i][j-1]=='1' && vis[i][j-1]==false)dfs(i,j-1,grid,vis);
-    }
-
-class Pair{
-        int row;
-        int col;
-        Pair(int row,int col){
-            this.row = row;
-            this.col = col;
-        }
-}
-    private void bfs(int i, int j, char[][] grid, boolean[][] vis) {
-        int m = grid.length;
-        int n = grid[0].length;
-        Queue<Pair> q = new LinkedList<>();
-        q.add(new Pair(i,j));
-        vis[i][j] = true;
-        while(q.size()>0){
-            Pair front = q.remove();
-            int row = front.row,col = front.col;
-            //top row-1 col
-            if(row>0){
-              if(vis[row-1][col]==false && grid[row-1][col]=='1'){
-                  q.add(new Pair(row-1,col));
-                  vis[row-1][col] = true;
-              }
-            }
-            //right row col+1
-            if(col+1<n){
-                if(vis[row][col+1]==false && grid[row][col+1]=='1'){
-                    q.add(new Pair(row,col+1));
-                    vis[row][col+1] = true;
-                }
-            }
-            //left row col-1
-            if(col>0){
-                if(vis[row][col-1]==false && grid[row][col-1]=='1'){
-                    q.add(new Pair(row,col-1));
-                    vis[row][col-1] = true;
-                }
-            }
-            //down row+1 col
-            if(row+1<m){
-                if(vis[row+1][col]==false && grid[row+1][col]=='1'){
-                    q.add(new Pair(row+1,col));
-                    vis[row+1][col] = true;
+        int cnttt = 0;
+        boolean[][] visited = new boolean[m][n];
+        for(int i=0;i<m;i++){
+            for(int j = 0;j<n;j++){
+                if(!visited[i][j] && grid[i][j]=='1'){
+                dfs(grid,visited,i,j);
+                cnttt++;
                 }
             }
         }
+        return cnttt;
+    }
+    public void dfs(char[][] grid,boolean[][] visited,int i,int j){
+        visited[i][j] = true;
+        int m = grid.length;
+        int n = grid[0].length;
+        if(i+1<m && grid[i+1][j]=='1' && !visited[i+1][j])dfs(grid,visited,i+1,j);
+        if(i-1>=0 && grid[i-1][j]=='1' && !visited[i-1][j])dfs(grid,visited,i-1,j);
+        if(j+1<n && grid[i][j+1]=='1' && !visited[i][j+1])dfs(grid,visited,i,j+1);
+        if(j-1>=0 && grid[i][j-1]=='1' && !visited[i][j-1])dfs(grid,visited,i,j-1);
     }
 }
