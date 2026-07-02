@@ -1,10 +1,8 @@
 class Solution {
     public boolean backspaceCompare(String s, String t) {
-        String p = change(s);
-        String q = change(t);
-        System.out.println(p);
-        System.out.println(q);
-        if(p.equals(q))return true;
+        s = change(s);
+        t = change(t);
+        if(s.equals(t))return true;
         else return false;
     }
     public String change(String s){
