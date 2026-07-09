@@ -2,51 +2,49 @@ class Pair{
     int row;
     int col;
     int time;
-   public Pair(int row,int col,int time){
+    Pair(int row,int col,int time){
         this.row = row;
         this.col = col;
         this.time = time;
     }
 }
-
 class Solution {
     public int orangesRotting(int[][] grid) {
         int m = grid.length;
         int n = grid[0].length;
-       Queue<Pair> qu = new LinkedList<>();
-       int[][] vis = new int[m][n]; 
-       int cnt = 0;
-       int cntfresh = 0;
+        Queue<Pair> que = new LinkedList<>();
+        int fresh =0;
+        int cntfresh = 0;
         for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
-               if(grid[i][j]==2){
-                 qu.add(new Pair(i,j,0));
-                 vis[i][j] = 2;
-               }
-               if(grid[i][j]==1)cntfresh++;
+                if(grid[i][j]==2)que.add(new Pair(i,j,0));
+                else if(grid[i][j]==0)continue;
+                else fresh++;
             }
         }
-            int tm = 0;
-            int[] drow = {-1,0,1,0};
-            int[] dcol = {0,1,0,-1};
-            while(!qu.isEmpty()){
-                Pair curr = qu.remove();
-                int r = curr.row;
-                int c = curr.col;
-                int t = curr.time;
-                tm = Math.max(t,tm);
-                for(int i=0;i<4;i++){
-                    int nr = r + drow[i];
-                    int nc = c + dcol[i];
-                    if(nr>=0 && nr<m && nc>=0 && nc<n && vis[nr][nc]==0 && grid[nr][nc]==1){
-                    qu.add(new Pair(nr,nc,t+1));
-                    vis[nr][nc]=2;
-                    cnt++;
-                }
-                }
+        boolean[][] check = new boolean[m][n];
+        // int dr = {-1,0,1,0};
+        // int dc = {0,-1,0,1};
+        int t = 0;
+        while(!que.isEmpty()){
+        int[] dr = {-1,0,1,0};
+        int[] dc = {0,-1,0,1};
+            Pair p = que.remove();
+            int r = p.row;
+            int c = p.col;
+            int tc = p.time;
+            t = Math.max(t,tc);
+            for(int i=0;i<4;i++){
+            int nr = r + dr[i];
+            int nc = c +dc[i];
+            if(nr>=0 && nr<m && nc>=0 && nc<n && grid[nr][nc]==1 && check[nr][nc]==false){
+                que.add(new Pair(nr,nc,tc+1));
+                check[nr][nc] = true;
+                cntfresh++;
+            }
         }
-        if(cnt!=cntfresh)return -1;
-        return tm;
         }
+        if(fresh!=cntfresh)return -1;
+        else return t;
     }
-    
+}
