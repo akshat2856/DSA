@@ -20,10 +20,11 @@ class Solution {
     }
     private void mirror(TreeNode root){
         if(root==null)return;
+        mirror(root.left);
+        mirror(root.right);
         TreeNode temp = root.left;
         root.left = root.right;
         root.right = temp;
-        mirror(root.left);
-        mirror(root.right);
+        
     }
 }
