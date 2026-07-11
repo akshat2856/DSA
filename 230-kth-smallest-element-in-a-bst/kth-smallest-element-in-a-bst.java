@@ -14,21 +14,19 @@
  * }
  */
 class Solution {
-    int val = -1;
-    int cnttt = 0;
     public int kthSmallest(TreeNode root, int k) {
-        if(root==null)return val;
-        solve(root,k);
-        return val;
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
+        dfs(root, maxHeap, k);
+        return maxHeap.peek();
     }
-    public void solve(TreeNode root,int k){
-       if(root==null)return;
-       if(root.left!=null) solve(root.left,k);
-        cnttt++;
-       if(cnttt==k){
-            val = root.val;
-            return;
+
+    private void dfs(TreeNode node, PriorityQueue<Integer> maxHeap, int k) {
+        if (node == null) return;
+        maxHeap.offer(node.val);
+        if (maxHeap.size() > k) {
+            maxHeap.poll();
         }
-       if(root.right!=null)solve(root.right,k);
+        dfs(node.left, maxHeap, k);
+        dfs(node.right, maxHeap, k);
     }
 }
