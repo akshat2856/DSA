@@ -11,7 +11,7 @@ class Solution {
            if(i==0) map.put(nums[i],1);
            else{
             if(nums[i]>nums[i-1])map.put(nums[i], map.getOrDefault(nums[i-1], 0) + 1);
-            else map.put(nums[i],map.get(nums[i]));
+           // else map.put(nums[i],map.get(nums[i]));
            }
         }
         int[] newarray = new int[n];
