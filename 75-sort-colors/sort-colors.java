@@ -6,19 +6,19 @@ class Solution {
         int high = n-1;
         while(mid<=high){
             if(nums[mid]==0){
-               int t = nums[low];
-               nums[low] = nums[mid];
-               nums[mid] = t;
-               low++;
-               mid++;
+                int t = nums[low];
+                nums[low]=nums[mid];
+                nums[mid]=t;
+                low++;
+                mid++;
             }
             else if(nums[mid]==1){
                 mid++;
             }
             else{
                 int t = nums[high];
-                nums[high] = nums[mid];
-                nums[mid] = t;
+                nums[high]=nums[mid];
+                nums[mid]=t;
                 high--;
             }
         }
