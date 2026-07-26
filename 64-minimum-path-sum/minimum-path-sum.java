@@ -22,7 +22,6 @@ class Solution {
             dp[i][j] = Integer.MAX_VALUE;
         else
             dp[i][j] = grid[i][j] + ans;
-
         return dp[i][j];
     }
 }
