@@ -3,10 +3,7 @@ class Solution {
         List<List<Integer>> list = new ArrayList<>();
         boolean[] visited =new boolean[nums.length];
         solve(nums,list,new ArrayList<>(),visited);
-        List<List<Integer>> uniqueLists = list.stream()
-    .distinct()
-    .collect(Collectors.toList());
-    return uniqueLists;
+        return list;
     }
     public void solve(int[] nums,List<List<Integer>> list,List<Integer> ans,boolean[] visited){
         if(ans.size()==nums.length){
