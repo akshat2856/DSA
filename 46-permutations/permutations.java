@@ -1,27 +1,22 @@
 class Solution {
-    public List<List<Integer>> permute(int[] arr) {
-        List<List<Integer>> ans = new ArrayList<>();
-        List<Integer> a = new ArrayList<>();
-        boolean[] check = new boolean[arr.length];
-        permutation(arr,check,a,ans);
-        return ans;
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> list = new ArrayList<>();
+        boolean[] visited =new boolean[nums.length];
+        solve(nums,list,new ArrayList<>(),visited);
+        return list;
     }
-
-    private void permutation(int[] arr, boolean[] check, List<Integer> a, List<List<Integer>> ans) {
-        int n = arr.length;
-        if(a.size()==n){
-            List<Integer> copy = new ArrayList<>(a);
-            ans.add(copy);
+    public void solve(int[] nums,List<List<Integer>> list,List<Integer> ans,boolean[] visited){
+        if(ans.size()==nums.length){
+            list.add(new ArrayList<>(ans));
             return;
         }
-        for(int i=0;i<n;i++){
-            if(!check[i]){
-                a.add(arr[i]);
-                check[i] = true;
-                permutation(arr,check,a,ans);
-                a.remove(a.size()-1);
-                check[i] = false;
-            }
+        for(int i=0;i<nums.length;i++){
+            if(visited[i])continue;
+            visited[i]=true;
+            ans.add(nums[i]);
+            solve(nums,list,ans,visited);
+            ans.remove(ans.size()-1);
+            visited[i]=false;
         }
     }
 }
