@@ -1,34 +1,33 @@
 class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
-        int m = prerequisites.length;
-        ArrayList<ArrayList<Integer>> adj =new ArrayList<>();
+        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
         for(int i=0;i<numCourses;i++){
             adj.add(new ArrayList<>());
         }
-        for(int i=0;i<m;i++){
-            int u = prerequisites[i][0];
-            int v = prerequisites[i][1];
-            adj.get(u).add(v);
+        for(int[] pre : prerequisites){
+            int start = pre[0];
+            int end = pre[1];
+            adj.get(end).add(start);
         }
         int[] indegree = new int[numCourses];
-        int cntt = 0;
+        for(int i=0;i<numCourses;i++){
+            for(int neig : adj.get(i)){
+                indegree[neig]++;
+            }
+        }
         Queue<Integer> que = new LinkedList<>();
         for(int i=0;i<numCourses;i++){
-            for(int it:adj.get(i)){
-                indegree[it]++;
-            }
+            if(indegree[i]==0)que.offer(i);
         }
-        for(int i=0;i<numCourses;i++){
-            if(indegree[i]==0)que.add(i);
-        }
+        int count = 0;
         while(!que.isEmpty()){
             int node = que.poll();
-            cntt++;
-            for(int it:adj.get(node)){
-                indegree[it]--;
-                if(indegree[it]==0)que.add(it);
+            count++;
+            for(int neig : adj.get(node)){
+                indegree[neig]--;
+                if(indegree[neig]==0)que.offer(neig);
             }
         }
-        return cntt==numCourses;
+        return count==numCourses;
     }
 }
