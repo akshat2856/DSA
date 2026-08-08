@@ -14,9 +14,6 @@ class Solution {
         }
         result.add(ans);
         }
-        List<Integer> temp = new ArrayList<>();
-        temp.add(1);
-        if(numRows==0)return temp;
         return result.get(numRows);
     }
 }
