@@ -1,11 +1,7 @@
 class Solution {
     public int missingInteger(int[] nums) {
         int n = nums.length;
-        if(n==1)return nums[0]+1;
-        // int maxsum = 0;
-        // for(int i=0;i<n;i++){
-        //     maxsum=Math.max(nums[i],maxsum);
-        // }
+       // if(n==1)return nums[0]+1;
         int sum = nums[0];
         int maxsum = nums[0];
         for(int i=1;i<n;i++){
