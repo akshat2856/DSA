@@ -1,48 +1,16 @@
 class Solution {
-    public List<Integer> findAnagrams(String s, String p) {
-        List<Integer> ans = new ArrayList<>();
-
-        if (s.length() < p.length()) return ans;
-
-        HashMap<Character, Integer> map = new HashMap<>();
-        for (char ch : p.toCharArray()) {
-            map.put(ch, map.getOrDefault(ch, 0) + 1);
+    public List<Integer> findAnagrams(String s2, String s1) {
+        List<Integer> list = new ArrayList<>();
+        char[] arr =  s1.toCharArray();
+        Arrays.sort(arr);
+        StringBuilder sb = new StringBuilder(new String(arr));
+        for(int i=0;i<=s2.length()-s1.length();i++){
+        StringBuilder pq = new StringBuilder(s2.substring(i,s1.length()+i));
+        char[] chh =  pq.toString().toCharArray();
+        Arrays.sort(chh);
+        pq = new StringBuilder(new String(chh));
+        if(sb.toString().equals(pq.toString()))list.add(i);
         }
-
-        int count = map.size();  
-        int i = 0, j = 0;
-        int k = p.length();
-
-        while (j < s.length()) {
-
-            char ch = s.charAt(j);
-            if (map.containsKey(ch)) {
-                map.put(ch, map.get(ch) - 1);
-                if (map.get(ch) == 0) {
-                    count--;
-                }
-            }
-
-            if (j - i + 1 < k) {
-                j++;
-            }
-        
-            else if (j - i + 1 == k) {
-            
-                if (count == 0) {
-                    ans.add(i);
-                }
-                char leftChar = s.charAt(i);
-                if (map.containsKey(leftChar)) {
-                    map.put(leftChar, map.get(leftChar) + 1);
-                    if (map.get(leftChar) == 1) {
-                        count++;
-                    }
-                }
-                i++;
-                j++;
-            }
-        }
-        return ans;
+        return list;
     }
 }
