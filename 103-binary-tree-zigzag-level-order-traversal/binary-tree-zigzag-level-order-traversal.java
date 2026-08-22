@@ -15,31 +15,33 @@
  */
 class Solution {
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
-        List<List<Integer>> res = new ArrayList<>();
-        if (root == null) return res;
-        Deque<TreeNode> dq = new LinkedList<>();
-        dq.add(root);
-        boolean leftToRight = true;
-        while (!dq.isEmpty()) {
-            int size = dq.size();
-            List<Integer> level = new ArrayList<>();
-            for (int i = 0; i < size; i++) {
-                if (leftToRight) {
-                    TreeNode node = dq.pollFirst();
-                    level.add(node.val);
-                    if (node.left != null) dq.addLast(node.left);
-                    if (node.right != null) dq.addLast(node.right);
-                } 
-                else {
-                    TreeNode node = dq.pollLast();
-                    level.add(node.val);
-                    if (node.right != null) dq.addFirst(node.right);
-                    if (node.left != null) dq.addFirst(node.left);
+        List<List<Integer>> list = new ArrayList<>();
+        if(root==null)return new ArrayList<>();
+        Deque<TreeNode> que = new ArrayDeque<>();
+        que.add(root);
+        int traverse = 0;
+        while(!que.isEmpty()){
+            int size = que.size();
+            List<Integer> li = new ArrayList<>();
+            if(traverse%2==0){
+                for(int i=0;i<size;i++){
+                    TreeNode temp = que.pollFirst();
+                    li.add(temp.val);
+                    if(temp.left!=null)que.add(temp.left);
+                    if(temp.right!=null)que.add(temp.right);
                 }
             }
-            res.add(level);
-            leftToRight = !leftToRight; 
-        }
-        return res;
+                else{
+                    for(int i=0;i<size;i++){
+                        TreeNode temp = que.pollLast();
+                        li.add(temp.val);
+                        if(temp.right!=null)que.addFirst(temp.right);
+                        if(temp.left!=null)que.addFirst(temp.left);
+                    }
+                }
+                list.add(li);
+                traverse++;
+            }
+        return list;
     }
 }
