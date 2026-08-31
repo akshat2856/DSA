@@ -24,7 +24,7 @@ class Solution {
         }
         
         if(list.size()<2)return new int[] {-1,-1};
-        else if(list.size()==2)return new int[] {list.get(list.size()-1)-list.get(0),list.get(list.size()-1)-list.get(0)};
+        // else if(list.size()==2)return new int[] {list.get(list.size()-1)-list.get(0),list.get(list.size()-1)-list.get(0)};
         else {
             for(int j=1;j<list.size();j++){
                 min = Math.min(min,list.get(j)-list.get(j-1));
