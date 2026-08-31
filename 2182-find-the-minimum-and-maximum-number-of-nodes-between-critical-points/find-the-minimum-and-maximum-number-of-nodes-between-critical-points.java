@@ -9,14 +9,6 @@
  * }
  */
 class Solution {
-    class Pair{
-        int val;
-        int idx;
-        Pair(int val,int inx){
-            this.val = val;
-            this.idx = idx;
-        }
-    }
     public int[] nodesBetweenCriticalPoints(ListNode head) {
         ArrayList<Integer> list = new ArrayList<>();
         ListNode prev = head;
