@@ -22,9 +22,9 @@ class Solution {
     public void remove(TreeNode root){
         if(root==null)return;
         if(!isone(root.left))root.left = null;
-        if(isone(root.left)) remove(root.left);
+        else remove(root.left);
         if(!isone(root.right))root.right = null;
-        if(isone(root.right)) remove(root.right);
+        else remove(root.right);
     }
     public boolean isone(TreeNode root){
         if(root==null)return false;
