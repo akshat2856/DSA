@@ -21,14 +21,12 @@ class Solution {
         tree.add(root);
         while(!tree.isEmpty()){
             int size = tree.size();
-            int level = 0;
             for(int i=0;i<size;i++){
                 TreeNode node = tree.poll();
-            level = node.val;
+                if(i==size-1)list.add(node.val);
                 if(node.left!=null)tree.add(node.left);
                 if(node.right!=null)tree.add(node.right);
             }
-            list.add(level);
         }
         return list;
     }
