@@ -10,10 +10,10 @@ class Solution {
                 count0++;
             }
             while(count0>k){
-                if(nums[i]==0)count0--;
+                if(nums[i]==0) count0--;
                 i++;
             }
-            count=Math.max(count,j-i+1);
+            count = Math.max(j-i+1,count);
             j++;
         }
         return count;
