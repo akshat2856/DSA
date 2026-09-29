@@ -16,6 +16,6 @@ class Solution {
         list.add(c[idx]);
         solve(c,target,answer,list,sum+c[idx],idx);
         list.remove(list.size()-1);
-        solve(c,target,answer,list,sum,idx+1);
+        solve(c,target,answer,list,sum,++idx);
     }
 }
