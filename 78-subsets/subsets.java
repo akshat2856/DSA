@@ -1,19 +1,18 @@
 class Solution {
-    List<List<Integer>> ans = new ArrayList<>();
     public List<List<Integer>> subsets(int[] nums) {
-        solve(nums,new ArrayList<>());
-        return ans;
+        List<List<Integer>> answer = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
+        solve(nums,answer,list,0);
+        return answer;
     }
-    public void solve(int[] ip,List<Integer> op){
-        if(ip.length==0){
-            ans.add(new ArrayList<>(op));
-return;
+    public void solve(int[] nums,List<List<Integer>> answer,List<Integer> list,int idx){
+        if(idx==nums.length){
+            answer.add(new ArrayList<>(list));
+            return;
         }
-        List<Integer> op1 = new ArrayList<>(op);
-        List<Integer> op2 = new ArrayList<>(op);
-        op2.add(ip[0]);
-        int[] newIp = Arrays.copyOfRange(ip, 1, ip.length);
-        solve(newIp, op1);
-        solve(newIp, op2);
+        list.add(nums[idx]);
+        solve(nums,answer,list,idx+1);
+        list.remove(list.size()-1);
+        solve(nums,answer,list,idx+1);
     }
 }
