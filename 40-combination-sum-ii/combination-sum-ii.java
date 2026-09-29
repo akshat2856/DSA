@@ -1,30 +1,50 @@
 class Solution {
     public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+
+        List<List<Integer>> answer = new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
+
         Arrays.sort(candidates);
-        List<List<Integer>> ans=new ArrayList<>();
-        helper(candidates,0,target,new ArrayList<>(),ans);
-        return ans;
+
+        solve(candidates, target, answer, list, 0, 0);
+
+        return answer;
     }
-    public static void helper(int ar[],int start,int target,List<Integer> li,List<List<Integer>> ans)
-    {
-        if(target==0)
-        {
-            ans.add(new ArrayList<>(li));
+
+    public void solve(int[] c, int target,
+                      List<List<Integer>> answer,
+                      List<Integer> list,
+                      int sum, int idx) {
+
+        if (sum == target) {
+            answer.add(new ArrayList<>(list));
             return;
         }
-        for(int i=start;i<ar.length;i++)
-        {
-            if(i>start && ar[i]==ar[i-1])
-            {
-                continue;
-            }
-            if(ar[i]>target)
-            {
-                break;
-            }
-            li.add(ar[i]);
-            helper(ar,i+1,target-ar[i],li,ans);
-            li.remove(li.size()-1);
+
+        if (sum > target || idx == c.length) {
+            return;
         }
+
+        // TAKE
+        list.add(c[idx]);
+
+        // Move to next index because
+        // every element can be used only once
+        solve(c, target, answer, list,
+              sum + c[idx], idx + 1);
+
+        // BACKTRACK
+        list.remove(list.size() - 1);
+
+        // NOT TAKE
+        int next = idx + 1;
+
+        // Skip duplicate values
+        while (next < c.length && c[next] == c[idx]) {
+            next++;
+        }
+
+        solve(c, target, answer, list,
+              sum, next);
     }
 }
