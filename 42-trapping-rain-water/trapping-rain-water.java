@@ -3,17 +3,17 @@ class Solution {
         int n = height.length;
         int[] left = new int[n];
         int[] right = new int[n];
+        int count = 0;
         left[0] = height[0];
         for(int i=1;i<n;i++){
-            left[i] = Math.max(left[i-1],height[i]);
+            left[i]=Math.max(left[i-1],height[i]);
         }
         right[n-1] = height[n-1];
-        for(int j=n-2;j>=0;j--){
-            right[j] = Math.max(right[j+1],height[j]);
+        for(int i=n-2;i>=0;i--){
+            right[i]=Math.max(right[i+1],height[i]);
         }
-        int count = 0;
         for(int k=0;k<n;k++){
-         count+=Math.min(left[k],right[k])-height[k];
+            count+=Math.min(left[k],right[k])-height[k];
         }
         return count;
     }
