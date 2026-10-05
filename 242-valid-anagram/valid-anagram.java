@@ -1,11 +1,11 @@
 class Solution {
     public boolean isAnagram(String s, String t) {
-        char[] arr = s.toCharArray();
-        Arrays.sort(arr);
-        String ss = new String(arr);
-        char[] arrr = t.toCharArray();
-        Arrays.sort(arrr);
-        String sss = new String(arrr);
-        return ss.equals(sss);
+        char[] ch1 = s.toCharArray();
+        Arrays.sort(ch1);
+        String p = new String(ch1);
+        char[] ch2 = t.toCharArray();
+        Arrays.sort(ch2);
+        String q = new String(ch2);
+        return p.equals(q);
     }
 }
