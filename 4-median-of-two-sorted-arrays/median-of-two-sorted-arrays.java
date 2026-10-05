@@ -20,7 +20,7 @@ class Solution {
             return (double)answer[mid];
         }
         else{
-             return ((double)(answer[mid]+answer[mid+1])/2);
+             return (double)(answer[mid]+answer[mid+1])/2;
         }
     }
 }
