@@ -15,33 +15,35 @@
  */
 class Solution {
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
-        List<List<Integer>> list = new ArrayList<>();
+        ArrayDeque<TreeNode> q = new ArrayDeque<>();
+        List<List<Integer>> answer = new ArrayList<>();
         if(root==null)return new ArrayList<>();
-        Deque<TreeNode> que = new ArrayDeque<>();
-        que.add(root);
-        int traverse = 0;
-        while(!que.isEmpty()){
-            int size = que.size();
-            List<Integer> li = new ArrayList<>();
-            if(traverse%2==0){
-                for(int i=0;i<size;i++){
-                    TreeNode temp = que.pollFirst();
-                    li.add(temp.val);
-                    if(temp.left!=null)que.add(temp.left);
-                    if(temp.right!=null)que.add(temp.right);
+        q.add(root);
+        int i = 0;
+        while(!q.isEmpty()){
+            List<Integer> list = new ArrayList<>();
+            int size = q.size();
+            if(i%2==0){
+                for(int j=0;j<size;j++){
+                    TreeNode temp = q.poll();
+                    int val = temp.val;
+                    list.add(val);
+                    if(temp.left!=null)q.add(temp.left);
+                    if(temp.right!=null)q.add(temp.right);
                 }
             }
-                else{
-                    for(int i=0;i<size;i++){
-                        TreeNode temp = que.pollLast();
-                        li.add(temp.val);
-                        if(temp.right!=null)que.addFirst(temp.right);
-                        if(temp.left!=null)que.addFirst(temp.left);
-                    }
+            else{
+                for(int j=0;j<size;j++){
+                    TreeNode temp = q.pollLast();
+                    int val = temp.val;
+                    list.add(val);
+                    if(temp.right!=null)q.addFirst(temp.right);
+                    if(temp.left!=null)q.addFirst(temp.left);
                 }
-                list.add(li);
-                traverse++;
             }
-        return list;
+            i++;
+            answer.add(list);
+        }
+        return answer;
     }
 }
